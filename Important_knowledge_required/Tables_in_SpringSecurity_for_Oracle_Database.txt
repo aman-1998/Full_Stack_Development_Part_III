@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Spring5_SpringSecurity_part10_JDBC_connectivity_N107
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+CREATE TABLE "USERS" (
+    "USERNAME"   VARCHAR2(128),
+    "PASSWORD"   VARCHAR2(128) NOT NULL,
+    "ENABLED"    CHAR(1 BYTE) NOT NULL,
+    CHECK ( enabled IN ('Y','N') ),
+    PRIMARY KEY ( "USERNAME" )
+);
+
+CREATE TABLE "AUTHORITIES" (
+    "USERNAME"    VARCHAR2(128) NOT NULL,
+    "AUTHORITY"   VARCHAR2(128) NOT NULL,
+    CONSTRAINT "AUTHORITIES_UNIQUE" UNIQUE ( "USERNAME","AUTHORITY" ),
+    CONSTRAINT "AUTHORITIES_FK1" FOREIGN KEY ( "USERNAME" )
+        REFERENCES "USERS" ( "USERNAME" )
+);
+
+CREATE TABLE "SCHOOL" (
+    "NAME"    VARCHAR2(128) NOT NULL,
+    PRIMARY KEY ( "NAME" )
+);
+
+
+Table USERS:-
+USERNAME    PASSWORD   Enabled                                                                                                                      
+----------- ---------- --------
+aman        test123    Y                                                                                                                      
+madhav      test123    Y                                                                                                                     
+rakhi       test123    Y                                                                                                                     
+nitu        test123    Y
+
+
+Table AUTHORITIES:-
+USERNAME     AUTHORITY                                                                                                                       
+----------- -----------
+aman        ROLE_TEACHER                                                                                                                    
+madhav      ROLE_STUDENT                                                                                                                    
+nitu        ROLE_ADMIN                                                                                                                      
+nitu        ROLE_TEACHER                                                                                                                    
+rakhi       ROLE_ADMIN
+
+
+Table SCHOOL:-
+NAME                                                                                                                            
+--------------------------------------------
+KANCHRAPARA HARNETT ENGLISH MEDIUM SCHOOL
+

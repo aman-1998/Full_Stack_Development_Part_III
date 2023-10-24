@@ -1,0 +1,184 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Spring5_SpringSecurity_part10_JDBC_connectivity_N107
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Understanding creation of user in CDB & PDB and granting various privileges.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+Enter username: sys as sysdba
+Enter Password: sys
+
+
+#################################################################################
+
+show con_name;
+
+CON_NAME 
+------------------------------
+CDB$ROOT
+
+#################################################################################
+
+By default we are in CDB (i.e., When we give SID instead of Service name)
+
+#################################################################################
+
+select name, cdb from v$database;
+
+NAME      CDB
+--------- ---
+XE        YES
+
+#################################################################################
+
+show pdbs;
+
+    CON_ID CON_NAME                       OPEN MODE  RESTRICTED
+---------- ------------------------------ ---------- ----------
+         2 PDB$SEED                       READ ONLY  NO        
+         3 XEPDB1                         READ WRITE NO
+		 
+##################################################################################
+
+alter session set container=XEPDB1
+
+>>Now we have moved inside PDB database
+
+To create user inside PDB database, we first have to move inside PDB.
+
+###################################################################################
+
+show con_name;
+
+CON_NAME 
+------------------------------
+XEPDB1
+
+###################################################################################
+
+CREATE USER practice identified by practice;
+
+>>User created
+
+###################################################################################
+
+Note:- If PDB database entry is there in listner.ora file then only we can connect to that
+database using "practice" user or schema.
+
+####################################################################################
+
+connect practice/practice@XEPDB1;
+
+OR, in SQL Developer, we have to give service name = XEPDB1
+
+Because of this command we are disconnected from sys schema inside XEPDB1.
+
+#####################################################################################
+
+>>ORA-01045: user practice lacks CREATE SESSION privilege; logon denied
+
+We will get this error because, the privilege of connecting is not given to this
+user by DBA. So, first we will have to give 
+
+######################################################################################
+
+connect sys/sys@xepdb1 as sysdba;
+
+>>connected
+
+######################################################################################
+
+show con_name;
+
+CON_NAME 
+------------------------------
+XEPDB1
+
+######################################################################################
+
+grant create session to practice;
+
+>>Grant succeeded
+
+#######################################################################################
+
+connect practice/practice@xepdb1
+
+>>connected
+
+#######################################################################################
+
+connect sys/sys as sysdba;
+
+>>connected
+
+#######################################################################################
+
+show con_name;
+
+CON_NAME 
+------------------------------
+CDB$ROOT
+
+#######################################################################################
+
+create user c##practice identified by c##practice;
+
+>>User created
+
+########################################################################################
+
+grant create session to c##practice;
+
+>>Grant succeeded
+
+########################################################################################
+
+connect c##practice/C##practice;
+
+>>connected
+
+########################################################################################
+
+connect c##practice/c##practice@xepdb1;
+
+>>ORA-01045: user practice lacks CREATE SESSION privilege; logon denied
+
+########################################################################################
+
+connect sys/sys as sysdba;
+
+>>connected
+
+########################################################################################
+
+grant create session to c##practice container=all;
+
+>>Grant succeeded
+
+#########################################################################################
+
+connect c##practice/c##practice#xepdb1;
+
+>>connected
+
+##################################################
+##################################################
+
+Youtube Link: https://www.youtube.com/watch?v=U-NQlwbgZLo
+
+https://www.youtube.com/watch?v=z6o3YyYTiiI
+
+############################################################
+
+GRANT ALL PRIVILEGES TO c##spring_security;
+
+
+
+
+
+
