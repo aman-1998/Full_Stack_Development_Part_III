@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+  <property name="LOG_PATTERN" value="%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n" />
+  <property name="APP_LOG_ROOT" value="G:/temp"/>
+   
+  <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+  	  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	      <level>WARN</level>
+	      <level>ERROR</level>
+	      <level>INFO</level>
+      </filter>
+  	  <encoder>
+  	  	  <pattern>%d{yyyy-MM-dd HH:mm:ss} [%yellow(%thread)] [%highlight(%-5level)] %green(%logger{36}) - %msg%n</pattern>
+  	  </encoder>
+  </appender>
+ 
+  <appender name="applicationLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${APP_LOG_ROOT}/application.log</file>
+    <encoder>
+  	  	  <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36}.%M.%L - %msg%n</pattern>
+  	  </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <fileNamePattern>${APP_LOG_ROOT}/archived/application-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+          <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+          	  <maxFileSize>10MB</maxFileSize>
+          </timeBasedFileNamingAndTriggeringPolicy>
+      </rollingPolicy>
+  </appender>
+  
+  <appender name="warnApplicationLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${APP_LOG_ROOT}/warn-error-application.log</file>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+    	<level>WARN</level>
+    	<level>ERROR</level>
+    </filter>
+    <encoder>
+  	  	  <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36}.%M.%L - %msg%n</pattern>
+  	  </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <fileNamePattern>${APP_LOG_ROOT}/archived/warn-error-application-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+          <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+          	  <maxFileSize>10MB</maxFileSize>
+          </timeBasedFileNamingAndTriggeringPolicy>
+      </rollingPolicy>
+  </appender>
+  
+  <appender name="hibernateLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${APP_LOG_ROOT}/database.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      	<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] [%-5level] %logger{36}.%M.%L - %msg%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+          <fileNamePattern>${APP_LOG_ROOT}/archived/database-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+          <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+          	  <maxFileSize>10MB</maxFileSize>
+          </timeBasedFileNamingAndTriggeringPolicy>
+      </rollingPolicy>
+  </appender>
+  
+  <logger name="personal.learning" level="TRACE" additivity="false">
+  	<appender-ref ref="console" />
+    <appender-ref ref="applicationLog" />
+    <appender-ref ref="warnApplicationLog" />
+  </logger>
+   
+  <logger name="org.hibernate.SQL" level="DEBUG">
+    <appender-ref ref="hibernateLog" />
+  </logger>
+  
+  <logger name="org.hibernate.type.descriptor.sql.BasicBinder" level="TRACE">
+    <appender-ref ref="hibernateLog" />
+  </logger>
+ 
+   <root level="info">
+      <appender-ref ref="console" />
+   </root>
+    
+</configuration>

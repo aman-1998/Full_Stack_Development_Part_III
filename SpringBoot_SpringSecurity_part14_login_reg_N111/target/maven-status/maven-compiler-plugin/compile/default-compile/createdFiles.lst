@@ -1,0 +1,13 @@
+personal\learning\model\entity\Product.class
+personal\learning\model\dao\ProductDAO.class
+personal\learning\controller\ProductController.class
+personal\learning\Application.class
+personal\learning\model\entity\Brand.class
+personal\learning\custom\response\SuccessPayload.class
+personal\learning\ServletInitializer.class
+personal\learning\model\dao\BrandDAO.class
+personal\learning\services\ProductService.class
+personal\learning\configuration\DBConfiguration.class
+personal\learning\controller\BrandController.class
+personal\learning\custom\response\ErrorPayload.class
+personal\learning\services\BrandService.class
