@@ -12,9 +12,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
-
+/*
+ * addFilterBefore : This type of filter can be used to validate request before it reaches the servlets
+ */
 public class RequestValidationFilter implements Filter {
+	
+	private static final Logger logger = LoggerFactory.getLogger(RequestValidationFilter.class);
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -28,6 +34,7 @@ public class RequestValidationFilter implements Filter {
 				request.setAttribute("reservedUsername", "true");
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/loginPage.jsp");
 				dispatcher.forward( request, response );
+				logger.debug("Username " + username + " can't be used for login");
 				throw new BadCredentialsException("Reserved username can't be used for login");
 			} else {
 				chain.doFilter(request, response);

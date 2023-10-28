@@ -11,6 +11,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import personal.learning.config.auth.provider.CustomAuthenticationProvider;
+import personal.learning.filter.ExecuteOncePerRequestFilter;
+import personal.learning.filter.LoggedInUserInformationFilter;
+import personal.learning.filter.LoginProcessFilter;
 import personal.learning.filter.RequestValidationFilter;
 import personal.learning.services.UserService;
 import personal.learning.web.utility.Constants;
@@ -45,7 +48,10 @@ public class MySpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
-		http.addFilterBefore(new RequestValidationFilter(), UsernamePasswordAuthenticationFilter.class)
+		http.addFilterBefore(new RequestValidationFilter(), UsernamePasswordAuthenticationFilter.class) // RequestValidationFilter will be executed before UsernamePasswordAuthenticationFilter
+			.addFilterAt(new LoginProcessFilter(), UsernamePasswordAuthenticationFilter.class) // LoginProcessFilter and UsernamePasswordAuthenticationFilter can be executed randomly at this position i.e., either LoginProcessFilter will be executed before UsernamePasswordAuthenticationFilter or viceversa.
+			.addFilterAfter(new LoggedInUserInformationFilter(), UsernamePasswordAuthenticationFilter.class) // LoggedInUserInformationFilter will be executed after UsernamePasswordAuthenticationFilter
+			.addFilterAfter(new ExecuteOncePerRequestFilter(), UsernamePasswordAuthenticationFilter.class) // ExecuteOncePerRequestFilter will be executed only once per request after UsernamePasswordAuthenticationFilter
 			.authorizeRequests()
 			.antMatchers("/notice/**", "/holiday/**").authenticated()
 			.antMatchers("/performance/**").hasAuthority(Constants.ROLE_TEACHER)
