@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import personal.learning.aspect.Aspect1;
+import personal.learning.aspect.Aspect2;
+import personal.learning.aspect.Aspect3;
 
 /*
  * Advantages of AOP:-
@@ -92,7 +94,9 @@ import personal.learning.aspect.Aspect1;
  * Examples:-
  * ~~~~~~~~~~
  * @Before("execution(public void personal.learning.dao.AccountDao.addAccount())")
+ * @Before("execution(public java.util.List<personal.learning.model.entity.Country> getCountryList())")
  * @Before("execution(public void addAccount())")
+ * execution(public boolean isNew*(String))
  * @Before("execution(public void add*())")
  * @Before("execution(* * add*())")
  * @Before("execution(* add*())")
@@ -106,6 +110,7 @@ import personal.learning.aspect.Aspect1;
  * 
  * Examples:-
  * ~~~~~~~~~~
+ * @Before("execution(public void save(personal.learning.model.entity.Users))")
  * @Before("execution(* addAccount())")
  * @Before("execution(* addAccount(personal.learning.entity.Account))")
  * @Before("execution(public void addAccount(*))")
@@ -124,4 +129,13 @@ public class AOPConfiguration {
 		return new Aspect1();
 	}
 	
+	@Bean
+	public Aspect2 aspect2() {
+		return new Aspect2();
+	}
+	
+	@Bean
+	public Aspect3 aspect3() {
+		return new Aspect3();
+	}
 }

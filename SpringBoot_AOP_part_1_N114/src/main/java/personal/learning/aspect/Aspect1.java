@@ -7,7 +7,7 @@ import org.aspectj.lang.annotation.Before;
 public class Aspect1 {
 	
 	@Before("execution(public void save(personal.learning.model.entity.Users))")
-	public void beforeServerSideValidation() {
+	public void beforeSavingUserInDB() {
 		System.out.println("====> Saving the user in the database <====");
 	}
 }
