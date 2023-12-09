@@ -366,3 +366,4 @@ The folders are named as <i>conceptName_NserialNo</i>, for example Dependency_In
 189. https://www.w3schools.com/git/git_ignore.asp?remote=github - gitignore <br>
 190. https://www.devglan.com/online-tools/hmac-sha256-online - HMAC-SHA256 Online Generator Tool <br>
 191. https://www.youtube.com/watch?v=preCXrKFISg - Servlet Filter Practical <br>
+192. https://docs.spring.io/spring-framework/docs/2.5.3/reference/aop.html - Spring AOP Concepts <br>
