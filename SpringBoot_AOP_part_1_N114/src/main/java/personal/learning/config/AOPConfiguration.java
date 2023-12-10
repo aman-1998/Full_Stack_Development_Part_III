@@ -5,8 +5,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import personal.learning.aspect.Aspect1;
+import personal.learning.aspect.Aspect10;
+import personal.learning.aspect.Aspect11;
 import personal.learning.aspect.Aspect2;
 import personal.learning.aspect.Aspect3;
+import personal.learning.aspect.Aspect4;
+import personal.learning.aspect.Aspect5;
+import personal.learning.aspect.Aspect6;
+import personal.learning.aspect.Aspect7;
+import personal.learning.aspect.Aspect8;
+import personal.learning.aspect.Aspect9;
 
 /*
  * Advantages of AOP:-
@@ -79,6 +87,10 @@ import personal.learning.aspect.Aspect3;
  * -> Spring AOP uses some AspectJ annotations and AspectJ classes
  * 
  * ---------------------------------------------------------------------------------------------------------------------
+ * Note:-
+ * ```````
+ * Spring AOP currently supports only method execution join points (advising the execution of methods on Spring beans).
+ * ---------------------------------------------------------------------------------------------------------------------
  * Spring AOP uses AspectJ's pointcut expression language. There are
  * various types of pointcut expressions. We are starting with
  * execution pointcuts which applies to execution of methods.
@@ -96,10 +108,17 @@ import personal.learning.aspect.Aspect3;
  * @Before("execution(public void personal.learning.dao.AccountDao.addAccount())")
  * @Before("execution(public java.util.List<personal.learning.model.entity.Country> getCountryList())")
  * @Before("execution(public void addAccount())")
- * execution(public boolean isNew*(String))
  * @Before("execution(public void add*())")
- * @Before("execution(* * add*())")
+ * @Before("execution(public boolean isNew*(String))")
+ * @Before("execution(public * getLang*())")
  * @Before("execution(* add*())")
+ * 
+ * 
+ * Note:-
+ * ``````
+ * @Before("execution(* * geLangtMap())") // Wrong Pointcut expression. Because modifiers-pattern is optional so there is no need to specify wildcard(*) for it.
+ * @Before("execution(* get*Map())") // Wrong Pointcut expression. Because wildcard(*) can't be applied in the middle of method name.
+ * 
  * 
  * 
  * For param-pattern:-
@@ -114,7 +133,7 @@ import personal.learning.aspect.Aspect3;
  * @Before("execution(* addAccount())")
  * @Before("execution(* addAccount(personal.learning.entity.Account))")
  * @Before("execution(public void addAccount(*))")
- * @Before("execution(* * personal.learning.dao.AccountDao.addAccount(..))")
+ * @Before("execution(* personal.learning.dao.AccountDao.addAccount(..))")
  * @Before("execution(* personal.learning.dao.*.*(..))")
  * 
  * 
@@ -138,4 +157,45 @@ public class AOPConfiguration {
 	public Aspect3 aspect3() {
 		return new Aspect3();
 	}
+	
+	@Bean
+	public Aspect4 aspect4() {
+		return new Aspect4();
+	}
+	
+	@Bean
+	public Aspect5 aspect5() {
+		return new Aspect5();
+	}
+	
+	@Bean
+	public Aspect6 aspect6() {
+		return new Aspect6();
+	}
+	
+	@Bean
+	public Aspect7 aspect7() {
+		return new Aspect7();
+	}
+	
+	@Bean
+	public Aspect8 aspect8() {
+		return new Aspect8();
+	}
+	
+	@Bean
+	public Aspect9 aspect9() {
+		return new Aspect9();
+	}
+	
+	@Bean
+	public Aspect10 aspect10() {
+		return new Aspect10();
+	}
+	
+	@Bean
+	public Aspect11 aspect11() {
+		return new Aspect11();
+	}
+	
 }

@@ -46,7 +46,7 @@ public class UserRegistrationController {
 	private ModelAndView initRegistration(UserRegistrationDTO userRegistrationDTO) {
 		
 		ModelAndView modelAndView = new ModelAndView("registrationPage");
-		//userService.test();
+		
 		String schoolName = schoolService.getSchoolName();
 		
 		LinkedHashMap<String, String> genderMap = new LinkedHashMap<>();

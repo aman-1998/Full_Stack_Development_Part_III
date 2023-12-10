@@ -8,6 +8,6 @@ public class Aspect2 {
 	
 	@Before("execution(public java.util.List<personal.learning.model.entity.Country> getCountryList())")
 	public void beforeFetchingCountriesFromDB() {
-		System.out.println("=======> Fetching list of countries from DB <========");
+		System.out.println("=======> Fetching list of countries from DB to validate country <========");
 	}
 }
