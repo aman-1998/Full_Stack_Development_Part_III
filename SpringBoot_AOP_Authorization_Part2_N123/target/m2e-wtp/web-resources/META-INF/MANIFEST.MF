@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Build-Jdk-Spec: 17
-Implementation-Title: SpringBoot_AOP_Authorization_Part2_N123
+Implementation-Title: SpringBoot_AOP_Authorization
 Implementation-Version: 0.0.1-SNAPSHOT
 Created-By: Maven Integration for Eclipse
 

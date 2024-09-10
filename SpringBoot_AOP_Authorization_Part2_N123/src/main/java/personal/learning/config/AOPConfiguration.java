@@ -88,6 +88,20 @@ import personal.learning.aspect.UserRegistrationAspect;
  * ``````````````
  * Spring-AOP can create AOP proxies only for beans with interfaces - and  the controllers do not have an interface.
  * So, proxy doesn't get created for controllers.
+ * 
+ * Note:- (chatGPT)
+ * Spring AOP can create AOP proxies for beans with interfaces as well as for classes without interfaces. However, there is a difference in how proxies are created for these two scenarios.
+
+Interfaces: When a bean implements one or more interfaces, Spring AOP creates a JDK dynamic proxy. This proxy implements the interfaces of the target bean and delegates method invocations to the actual target bean. This is achieved using Java's dynamic proxy mechanism.
+
+Classes without Interfaces: When a bean does not implement any interfaces, Spring AOP creates a CGLIB proxy. CGLIB (Code Generation Library) is a library used to extend Java classes at runtime by generating dynamic subclasses. Spring uses CGLIB to create a subclass of the target class and overrides the methods that are advised by the aspects. This subclass is then used as a proxy for the target bean.
+
+Controllers in Spring MVC typically do not implement interfaces, so they fall into the second category. Spring AOP will create CGLIB proxies for controllers to apply aspects such as logging, security, transaction management, etc.
+
+Therefore, the statement that "proxy doesn't get created for controllers" is incorrect. Spring AOP can create proxies for controllers using CGLIB proxies even though they don't implement interfaces.
+ * 
+ * 
+ * 
  * ---------------------------------------------------------------------------------------------------------------------
  * Spring AOP uses AspectJ's pointcut expression language. There are
  * various types of pointcut expressions. We are starting with
@@ -96,7 +110,7 @@ import personal.learning.aspect.UserRegistrationAspect;
  * Syntax:-
  * ~~~~~~~~
  * execution(modifiers-pattern?  return-type-pattern  declaring-type-pattern?  
- * 			   method-type-pattern(param-pattern) throws-pattern)
+ * 			   method-name-pattern(param-pattern) throws-pattern)
  * 
  * ? - Optional
  * * - Wildcard (Matches on everything)
@@ -186,7 +200,7 @@ import personal.learning.aspect.UserRegistrationAspect;
  * @After -> This advice runs after target method irrespective of success or failure. 
  * It is similar to finally block.
  * 
- *----------------------------------------------------------------------------------------------------------------------
+ * ---------------------------------------------------------------------------------------------------------------------
  *
  */
 

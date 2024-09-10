@@ -16,7 +16,7 @@ import personal.learning.web.utility.Constants;
 @Aspect
 public class UserRegistrationAspect {
 	
-	@Around("execution(* personal.learning.services.UserService+.save(*)) && args(userRegistrationDTO)")
+	@Around("execution(* personal.learning.services.UserService+.save(*)) && @target(personal.learning.custom.annotation.Authorizable) && args(userRegistrationDTO)")
 	public void aroundSave(ProceedingJoinPoint pjp, UserRegistrationDTO userRegistrationDTO) throws Throwable {
 		
 		UserRepository userRepository = ((UserServiceImpl) pjp.getTarget()).getUserRepository();

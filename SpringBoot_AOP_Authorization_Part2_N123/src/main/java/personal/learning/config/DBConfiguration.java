@@ -17,6 +17,22 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import oracle.jdbc.pool.OracleDataSource;
 
+/*
+ * @EnableTransactionManagement is used to enable annotation-driven 
+ * transaction management. It is typically used along with @Configuration
+ * on a configuration class. By adding @EnableTransactionManagement, you 
+ * allow Spring to interpret @Transactional annotation on your methods and
+ * manage transaction accordingly, where you can control transactions using
+ * annotations instead of explicit transaction management code.
+ * When you use @Transactional annotation on methods in Spring, the framework
+ * handles the beginning and committing (or rolling back of transaction).
+ * So, you don't need to write explicit begin and commit statements. Spring
+ * automatically starts a transaction before the annotated method is called
+ * and commits (or rolls back) the transaction after the method completes, 
+ * depending on whether the method executes successfully or encounters an 
+ * exception.
+ */
+
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")

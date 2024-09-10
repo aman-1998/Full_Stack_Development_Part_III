@@ -1,6 +1,5 @@
 package personal.learning.services;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -17,6 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import personal.learning.custom.annotation.Authorizable;
 import personal.learning.model.dao.UserRepository;
 import personal.learning.model.entity.Country;
 import personal.learning.model.entity.Language;
@@ -26,16 +26,17 @@ import personal.learning.web.dto.UserRegistrationDTO;
 import personal.learning.web.utility.Constants;
 
 @Service
+@Authorizable
 public class UserServiceImpl implements UserService {
-	
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
 	
 	private UserRepository userRepository;
 	
 	public UserServiceImpl(UserRepository userRepository) {
 		this.userRepository = userRepository;
+	}
+	
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 	
 	@Override

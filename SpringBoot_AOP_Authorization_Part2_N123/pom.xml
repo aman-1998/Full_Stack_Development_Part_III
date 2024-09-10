@@ -10,7 +10,7 @@
   <artifactId>SpringBoot_AOP_Authorization_Part2_N123</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <name>SpringBoot_AOP_Authorization_Part2_N123</name>
+  <name>SpringBoot_AOP_Authorization</name>
   <properties>
 		<java.version>17</java.version>
   </properties>
@@ -38,11 +38,6 @@
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-taglibs</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
