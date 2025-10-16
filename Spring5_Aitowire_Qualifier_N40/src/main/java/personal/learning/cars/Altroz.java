@@ -12,7 +12,7 @@ public class Altroz implements Car {
 	
 	@Autowired
 	@Qualifier("petrolEngine")
-	Engine engine;
+	private Engine engine;
 
 	@Override
 	public String specification() {

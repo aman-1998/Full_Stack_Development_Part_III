@@ -29,7 +29,8 @@ public class ProductController {
 	AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DBConfiguration.class);
 	ProductService productService = context.getBean("pService", ProductService.class);
 	
-	@RequestMapping(value = "/{brandId}/products", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/{brandId}/"
+			+ "products", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<Product> getProductsByBrand(@PathVariable("brandId") int brandId, 
 											@RequestParam("category") String category,

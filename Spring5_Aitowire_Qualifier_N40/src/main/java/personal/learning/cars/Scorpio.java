@@ -10,7 +10,7 @@ import personal.learning.interfaces.Engine;
 public class Scorpio implements Car {
 	
 	@Autowired
-	Engine dieselEngine; //variable name should be equal to default component name
+	private Engine dieselEngine; //variable name should be equal to default component name
 
 	@Override
 	public String specification() {
